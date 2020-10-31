@@ -130,6 +130,7 @@ namespace TestCases
         public static void InheritanceTest07()
         {
             TestClass2 cls = new TestCls5();
+            cls.VMethod1();
             int val = 0;
             cls.VMethod3(ref val);
             if (val != 11)
@@ -232,6 +233,16 @@ namespace TestCases
             instance.TestVirtual();
         }
 
+        public static void InheritanceTest15()
+        {
+            var cls = new TestCls7();
+            int val = 0;
+            cls.VMethod3(ref val);
+
+            if (val != 1)
+                throw new Exception();
+        }
+
         public interface IData { }
 
         public class Data : IData { }
@@ -287,6 +298,19 @@ namespace TestCases
             public override float AbMethod2(int arg1)
             {
                 return arg1 + 3.2f;
+            }
+
+            protected override void AbMethod1()
+            {
+
+            }
+        }
+
+        class TestCls7 : TestClass2
+        {
+            public override float AbMethod2(int arg1)
+            {
+                return arg1 + 1.2f;
             }
 
             protected override void AbMethod1()

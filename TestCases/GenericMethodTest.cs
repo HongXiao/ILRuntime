@@ -9,6 +9,23 @@ using ILRuntimeTest.TestBase;
 
 namespace TestCases
 {
+
+    public static class TestGenericExtensionExtension
+    {
+        public class Test1<T>
+        {
+
+        }
+
+        public class Test2<T>
+        {
+
+        }
+        public static void CreateCollector<T>(this Test1<T> arg1, Test2<T>[] arg2)
+        {
+
+        }
+    }
     class GenericMethodTest
     {
         class GTest
@@ -330,6 +347,13 @@ namespace TestCases
             Console.WriteLine(t.ToString());
         }
 
+        public static void GenericMethodTest14()
+        {
+            Dictionary<int, List<int>> _notSelDict = new Dictionary<int, List<int>>();
+            var notSelGuids = _notSelDict.SelectMany(dict => dict.Value).ToList();
+            Console.WriteLine(notSelGuids.Count.ToString());
+        }
+
         public static void GenericExtensionMethod1Test1()
         {
             new ExtensionClass().Method1(v => { });
@@ -414,6 +438,13 @@ namespace TestCases
         {
             new SubExtensionClass<int>().Method3(new ArgumentException());
         }
+
+        public static void GenericExtensionMethod3Test8()
+        {
+            var t1 = new TestGenericExtensionExtension.Test1<int>();
+            var t2 = new TestGenericExtensionExtension.Test2<int>[] { new TestGenericExtensionExtension.Test2<int>() };
+            t1.CreateCollector(t2);
+        }        
 
         public static void GenericStaticMethodTest1()
         {
@@ -516,6 +547,17 @@ namespace TestCases
         {
             var t = typeof(T);//出错
             Console.WriteLine(t);
+        }
+
+        public static void GenericStaticMethodTest14()
+        {
+            var e2 = GenericStaticMethodTest14Sub<EnumTest.TestEnum>();
+            Console.WriteLine(e2);
+        }
+
+        static T GenericStaticMethodTest14Sub<T>()
+        {
+            return default(T);
         }
     }
 }
